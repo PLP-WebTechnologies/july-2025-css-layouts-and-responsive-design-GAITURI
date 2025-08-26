@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* * CSS GRID LAYOUT - Used for the main page structure (2D layout)
+ * It defines the areas for the header, navigation, main content, sidebar, and footer.
+ */
+.container {
+    display: grid;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        "main main sidebar"
+        "footer footer footer";
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr 1fr 300px;
+}
+
+header, nav, main, aside, footer {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #3b5998;
+    color: white;
+    grid-area: header;
+    text-align: center;
+}
+
+nav {
+    background-color: #6a85b3;
+    grid-area: nav;
+}
+
+nav ul {
+    list-style: none;
+    display: flex; /* Using Flexbox for navigation links */
+    justify-content: space-around;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    background-color: #fff;
+    grid-area: main;
+}
+
+aside {
+    background-color: #e0e0e0;
+    grid-area: sidebar;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    grid-area: footer;
+}
+
+/* * FLEXBOX LAYOUT - Used for the "cards" section inside the main content (1D layout)
+ * It makes the cards align horizontally on larger screens and wrap/stack on smaller ones.
+ */
+.card-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line */
+    margin-top: 20px;
+}
+
+.card {
+    flex: 1 1 200px; /* flex-grow, flex-shrink, flex-basis */
+    background-color: #f0f0f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+/* * RESPONSIVE DESIGN - Media Queries
+ * The layout adapts based on the screen width.
+ */
+
+/* Tablet View (up to 768px wide) */
+@media (max-width: 768px) {
+    .container {
+        /* Change the Grid layout for tablets */
+        grid-template-areas:
+            "header header"
+            "nav nav"
+            "main sidebar"
+            "footer footer";
+        grid-template-columns: 1fr 200px;
+    }
+}
+
+/* Mobile View (up to 480px wide) */
+@media (max-width: 480px) {
+    .container {
+        /* Create a single-column layout for mobile */
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "sidebar"
+            "footer";
+        grid-template-columns: 1fr;
+    }
+    
+    nav ul {
+        flex-direction: column; /* Stack navigation links on mobile */
+        gap: 10px;
+    }
+}
